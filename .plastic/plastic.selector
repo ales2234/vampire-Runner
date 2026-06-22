@@ -1,0 +1,4 @@
+repository "My project/vampire running@20067184538559@cloud"
+  path "/"
+    br "/main"
+    co "/main"

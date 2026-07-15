@@ -2,8 +2,10 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Ground
+  - obstacle
   layers:
   - Default
   - TransparentFX
@@ -11,11 +13,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - weapon
+  - character
+  - Ground
+  - background
+  - obstacle
   - 
   - 
   - 
@@ -41,3 +43,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: charcater
+    uniqueID: 2846771361
+    locked: 0
+  - name: weapon
+    uniqueID: 3371573975
+    locked: 0
+  - name: Ground
+    uniqueID: 4253982599
+    locked: 0
+  - name: obstacle
+    uniqueID: 2343607817
+    locked: 0
+  - name: background
+    uniqueID: 1476537449
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  m_MigratedRenderPipelines: []

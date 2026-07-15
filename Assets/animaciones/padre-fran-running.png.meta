@@ -55,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,7 +93,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -147,19 +147,19 @@ TextureImporter:
       name: padre-fran-running_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 139
-        width: 25
-        height: 37
+        x: 0
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a8fe79b3c9760f1b0800000000000000
+      spriteID: 16bb8b3500e8f8048872ba4239702aa0
       internalID: -5624882013873377398
       vertices: []
       indices: 
@@ -169,19 +169,19 @@ TextureImporter:
       name: padre-fran-running_1
       rect:
         serializedVersion: 2
-        x: 25
-        y: 75
-        width: 25
-        height: 37
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 754c5ff0576e13cc0800000000000000
+      spriteID: d9376d7dfc271da478e8b43517817546
       internalID: -3732949225660103593
       vertices: []
       indices: 
@@ -191,19 +191,19 @@ TextureImporter:
       name: padre-fran-running_2
       rect:
         serializedVersion: 2
-        x: 89
-        y: 75
-        width: 25
-        height: 37
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4d8caeec297abe3a0800000000000000
+      spriteID: 1202c5e7a31c5214a845930e89c3e233
       internalID: -6635025377021736748
       vertices: []
       indices: 
@@ -213,19 +213,19 @@ TextureImporter:
       name: padre-fran-running_3
       rect:
         serializedVersion: 2
-        x: 153
-        y: 75
-        width: 25
-        height: 37
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4b70bc00cc938ee20800000000000000
+      spriteID: 9fc790b44ac91724eb75d5b81d3246a3
       internalID: 3380015068690974644
       vertices: []
       indices: 
@@ -235,19 +235,19 @@ TextureImporter:
       name: padre-fran-running_4
       rect:
         serializedVersion: 2
-        x: 25
-        y: 11
-        width: 25
-        height: 37
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f2a574f4690356ca0800000000000000
+      spriteID: 06e4b15ff49528045893839174dde133
       internalID: -6024355504404866513
       vertices: []
       indices: 
@@ -257,19 +257,19 @@ TextureImporter:
       name: padre-fran-running_5
       rect:
         serializedVersion: 2
-        x: 89
-        y: 11
-        width: 25
-        height: 37
+        x: 64
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d1f78dd84ee515020800000000000000
+      spriteID: cbaf9326ff334394fb8229ffccd6c837
       internalID: 2328746818052587293
       vertices: []
       indices: 
@@ -279,19 +279,19 @@ TextureImporter:
       name: padre-fran-running_6
       rect:
         serializedVersion: 2
-        x: 153
-        y: 11
-        width: 25
-        height: 37
+        x: 128
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b954b077414c58840800000000000000
+      spriteID: 1a43fa9a2de9be245a03ada9a67bb2e4
       internalID: 5225798534808946075
       vertices: []
       indices: 
@@ -301,7 +301,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ef31229279eb5334dbd77e9d481761bd
     internalID: 0
     vertices: []
     indices: 
@@ -309,7 +309,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceOnImport
+        value: True
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":true,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       padre-fran-running_0: -5624882013873377398
       padre-fran-running_1: -3732949225660103593

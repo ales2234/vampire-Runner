@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 1515435757}
   - component: {fileID: 1515435756}
   - component: {fileID: 1515435755}
+  - component: {fileID: 1515435758}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -572,14 +573,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   rb: {fileID: 1515435756}
-  jumpForce: 15
+  jumpForce: 20
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   feetPos: {fileID: 260277199}
   groundDistance: 0.1
   showDebugLogs: 1
-  animator: {fileID: 0}
+  animator: {fileID: 1611837113}
 --- !u!50 &1515435756
 Rigidbody2D:
   serializedVersion: 5
@@ -623,6 +624,18 @@ Transform:
   - {fileID: 1611837110}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1515435758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515435754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a293ca229462cd448b230d377d4df3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1611837109
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +799,56 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1826303542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1826303544}
+  - component: {fileID: 1826303543}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1826303543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826303542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c3fed9a8902df49932d0b8fd919e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  obstaclesPrefabs:
+  - {fileID: 6136714963300487376, guid: 3f111b57e81c0134785ce4f19f5d1229, type: 3}
+  - {fileID: 6910696658207781030, guid: 043470b1f69ba0d44939b0b813a05089, type: 3}
+  - {fileID: 4019321238756688093, guid: ae49425d6abc0e341818f4931db932c2, type: 3}
+  spawnRate: 3
+  spawnForce: 5
+--- !u!4 &1826303544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826303542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.31, y: -3.96, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1855358916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,3 +1088,4 @@ SceneRoots:
   - {fileID: 699760897}
   - {fileID: 1515435757}
   - {fileID: 1053750295}
+  - {fileID: 1826303544}

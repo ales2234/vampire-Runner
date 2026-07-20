@@ -44,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded)
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
-        animator.SetFloat("Speed", rb.linearVelocity.x);
-        animator.SetBool("IsGrounded", isGrounded);
+        /*animator.SetFloat("Speed", rb.linearVelocity.x);
+        animator.SetBool("IsGrounded", isGrounded);*/
     }
 
     private bool WasJumpPressed()

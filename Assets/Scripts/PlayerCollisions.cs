@@ -2,12 +2,37 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private Vector3 startPosition;
+    private Rigidbody2D rb;
+
+    private void Awake()
     {
-        if (collision.gameObject.CompareTag("obstacle"))
+        startPosition = transform.position;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.onPlay.AddListener(ActivatePlayer);
+    }
+
+    private void ActivatePlayer()
+    {
+        transform.position = startPosition;
+
+        if (rb != null)
+            rb.linearVelocity = Vector2.zero;
+
+        gameObject.SetActive(true);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.CompareTag("obstacle"))
         {
             Debug.Log("Player hit an obstacle");
-            Destroy(collision.gameObject);
+            gameObject.SetActive(false);
+            GameManager.Instance.GameOver();
         }
     }
 }

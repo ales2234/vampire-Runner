@@ -5,6 +5,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float maxJumpHoldTime = 0.25f;
+    [SerializeField] private float jumpCutMultiplier = 0.4f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
     [SerializeField] private float groundDistance = 0.25f;
@@ -12,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private bool isGrounded;
+    private bool isJumping;
+    private float jumpHoldTimer;
 
     private void Awake()
     {
@@ -22,10 +26,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update()
-    {   
-        
-
-
+    {
         if (rb == null || feetPos == null)
         {
             if (showDebugLogs)
@@ -36,16 +37,32 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
 
-        if (WasJumpPressed())
+        if (isGrounded && WasJumpPressed())
         {
-            if (showDebugLogs)
-                Debug.Log($"Jump input detected. Grounded: {isGrounded}");
+            isJumping = true;
+            jumpHoldTimer = 0f;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-            if (isGrounded)
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            if (showDebugLogs)
+                Debug.Log("Jump started");
         }
-        /*animator.SetFloat("Speed", rb.linearVelocity.x);
-        animator.SetBool("IsGrounded", isGrounded);*/
+
+        if (isJumping && IsJumpHeld() && jumpHoldTimer < maxJumpHoldTime)
+        {
+            jumpHoldTimer += Time.deltaTime;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+
+        if (WasJumpReleased() && isJumping)
+        {
+            if (rb.linearVelocity.y > 0f)
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
+
+            isJumping = false;
+        }
+
+        if (isGrounded && rb.linearVelocity.y <= 0f)
+            isJumping = false;
     }
 
     private bool WasJumpPressed()
@@ -60,6 +77,40 @@ public class PlayerMovement : MonoBehaviour
 
         if (Keyboard.current != null &&
             Keyboard.current.spaceKey.wasPressedThisFrame)
+            return true;
+
+        return false;
+    }
+
+    private bool IsJumpHeld()
+    {
+        if (Touchscreen.current != null &&
+            Touchscreen.current.primaryTouch.press.isPressed)
+            return true;
+
+        if (Mouse.current != null &&
+            Mouse.current.leftButton.isPressed)
+            return true;
+
+        if (Keyboard.current != null &&
+            Keyboard.current.spaceKey.isPressed)
+            return true;
+
+        return false;
+    }
+
+    private bool WasJumpReleased()
+    {
+        if (Touchscreen.current != null &&
+            Touchscreen.current.primaryTouch.press.wasReleasedThisFrame)
+            return true;
+
+        if (Mouse.current != null &&
+            Mouse.current.leftButton.wasReleasedThisFrame)
+            return true;
+
+        if (Keyboard.current != null &&
+            Keyboard.current.spaceKey.wasReleasedThisFrame)
             return true;
 
         return false;

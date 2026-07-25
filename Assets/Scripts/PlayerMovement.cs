@@ -12,6 +12,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.25f;
     [SerializeField] private bool showDebugLogs = true;
     [SerializeField] private Animator animator;
+    [SerializeField] private Spawner spawner;
+    [SerializeField] private float baseAnimSpeed = 1f;
+    [Range(0f, 1f)] [SerializeField] private float animSpeedFactor = 0.5f;
+    [SerializeField] private float maxAnimSpeed = 3f;
 
     private bool isGrounded;
     private bool isJumping;
@@ -25,6 +29,12 @@ public class PlayerMovement : MonoBehaviour
             animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        if (spawner == null)
+            spawner = FindFirstObjectByType<Spawner>();
+    }
+
     private void Update()
     {
         if (rb == null || feetPos == null)
@@ -34,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
             return;
         }
+
+        UpdateAnimationSpeed();
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, groundDistance, groundLayer);
 
@@ -63,6 +75,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && rb.linearVelocity.y <= 0f)
             isJumping = false;
+    }
+
+    private void UpdateAnimationSpeed()
+    {
+        if (animator == null)
+            return;
+
+        if (spawner == null || GameManager.Instance == null || !GameManager.Instance.isGameOver)
+        {
+            animator.speed = baseAnimSpeed;
+            return;
+        }
+
+        float speed = baseAnimSpeed * Mathf.Pow(spawner.TimeAlive, animSpeedFactor);
+        animator.speed = Mathf.Min(speed, maxAnimSpeed);
     }
 
     private bool WasJumpPressed()

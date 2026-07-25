@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
@@ -11,42 +10,52 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
+
     #endregion
 
-    public float currentScore = 0f;
+    [SerializeField] private Spawner spawner;
+    [SerializeField] private float scoreMultiplier = 1f;
 
+    public float currentScore = 0f;
     public bool isGameOver = false;
 
     public UnityEvent onPlay = new UnityEvent();
     public UnityEvent onGameOver = new UnityEvent();
 
-    public void Update(){
-        if(isGameOver){
-            currentScore += Time.deltaTime;
-        }
+    private void Start()
+    {
+        if (spawner == null)
+            spawner = FindFirstObjectByType<Spawner>();
     }
 
-    public void StartGame(){
+    private void Update()
+    {
+        if (!isGameOver || spawner == null)
+            return;
+
+        // Score grows faster as obstacles move faster
+        currentScore += Time.deltaTime * scoreMultiplier * spawner._spawnForce;
+    }
+
+    public void StartGame()
+    {
         onPlay.Invoke();
         isGameOver = true;
     }
 
-    public void GameOver(){
+    public void GameOver()
+    {
         onGameOver.Invoke();
         isGameOver = false;
         currentScore = 0f;
-
     }
 
-    public string PrettyScore(){
-        return Mathf.RoundToInt (currentScore).ToString ();
-}
+    public string PrettyScore()
+    {
+        return Mathf.RoundToInt(currentScore).ToString();
+    }
 }

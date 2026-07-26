@@ -98,10 +98,6 @@ public class PlayerMovement : MonoBehaviour
             Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
             return true;
 
-        if (Mouse.current != null &&
-            Mouse.current.leftButton.wasPressedThisFrame)
-            return true;
-
         if (Keyboard.current != null &&
             Keyboard.current.spaceKey.wasPressedThisFrame)
             return true;
@@ -115,10 +111,6 @@ public class PlayerMovement : MonoBehaviour
             Touchscreen.current.primaryTouch.press.isPressed)
             return true;
 
-        if (Mouse.current != null &&
-            Mouse.current.leftButton.isPressed)
-            return true;
-
         if (Keyboard.current != null &&
             Keyboard.current.spaceKey.isPressed)
             return true;
@@ -130,10 +122,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Touchscreen.current != null &&
             Touchscreen.current.primaryTouch.press.wasReleasedThisFrame)
-            return true;
-
-        if (Mouse.current != null &&
-            Mouse.current.leftButton.wasReleasedThisFrame)
             return true;
 
         if (Keyboard.current != null &&

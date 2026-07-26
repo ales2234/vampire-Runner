@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
         if (!isGameOver || spawner == null)
             return;
 
-        // Score grows faster as obstacles move faster
         currentScore += Time.deltaTime * scoreMultiplier * spawner._spawnForce;
     }
 

@@ -30,7 +30,6 @@ public class PlayerCollisions : MonoBehaviour
     {
         if (other.transform.CompareTag("obstacle"))
         {
-            Debug.Log("Player hit an obstacle");
             gameObject.SetActive(false);
             GameManager.Instance.GameOver();
         }

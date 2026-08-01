@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private bool isJumping;
     private float jumpHoldTimer;
+    private readonly List<RaycastResult> uiRaycastResults = new List<RaycastResult>();
 
     private void Awake()
     {
@@ -95,7 +98,8 @@ public class PlayerMovement : MonoBehaviour
     private bool WasJumpPressed()
     {
         if (Touchscreen.current != null &&
-            Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            Touchscreen.current.primaryTouch.press.wasPressedThisFrame &&
+            !IsTouchOverUI())
             return true;
 
         if (Keyboard.current != null &&
@@ -108,7 +112,8 @@ public class PlayerMovement : MonoBehaviour
     private bool IsJumpHeld()
     {
         if (Touchscreen.current != null &&
-            Touchscreen.current.primaryTouch.press.isPressed)
+            Touchscreen.current.primaryTouch.press.isPressed &&
+            !IsTouchOverUI())
             return true;
 
         if (Keyboard.current != null &&
@@ -129,6 +134,22 @@ public class PlayerMovement : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    private bool IsTouchOverUI()
+    {
+        if (EventSystem.current == null || Touchscreen.current == null)
+            return false;
+
+        Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+        PointerEventData eventData = new PointerEventData(EventSystem.current)
+        {
+            position = touchPos
+        };
+
+        uiRaycastResults.Clear();
+        EventSystem.current.RaycastAll(eventData, uiRaycastResults);
+        return uiRaycastResults.Count > 0;
     }
 
     private void OnDrawGizmosSelected()

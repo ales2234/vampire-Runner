@@ -1,17 +1,26 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour
 {
     public void LoadGameScene()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("SampleScene");
+        if (FadeInOut.Instance != null)
+            FadeInOut.Instance.FadeToScene("SampleScene");
+        else
+        {
+            Time.timeScale = 1f;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        }
     }
 
     public void QuitGame()
     {
-        Time.timeScale = 1f;
-        Application.Quit();
+        if (FadeInOut.Instance != null)
+            FadeInOut.Instance.FadeAndQuit();
+        else
+        {
+            Time.timeScale = 1f;
+            Application.Quit();
+        }
     }
 }

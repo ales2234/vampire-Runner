@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float scoreMultiplier = 1f;
 
     public float currentScore = 0f;
+    public float highScore = 0f;
+    public Data data;
     public bool isGameOver = false;
 
     public UnityEvent onPlay = new UnityEvent();
@@ -30,6 +32,14 @@ public class GameManager : MonoBehaviour
     {
         if (spawner == null)
             spawner = FindFirstObjectByType<Spawner>();
+
+        string dataToLoad = SaveSystem.load("data");
+        if (dataToLoad != null)
+            data = JsonUtility.FromJson<Data>(dataToLoad);
+        else
+            data = new Data();
+
+        highScore = data.highScore;
     }
 
     private void Update()
@@ -48,7 +58,16 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (highScore < currentScore)
+            highScore = currentScore;
+
+        data.highScore = highScore;
+
+        string dataToSave = JsonUtility.ToJson(data);
+        SaveSystem.save("data", dataToSave);
+
         onGameOver.Invoke();
+
         isGameOver = false;
         currentScore = 0f;
     }
@@ -56,5 +75,10 @@ public class GameManager : MonoBehaviour
     public string PrettyScore()
     {
         return Mathf.RoundToInt(currentScore).ToString();
+    }
+
+    public string PrettyHighScore()
+    {
+        return Mathf.RoundToInt(highScore).ToString();
     }
 }

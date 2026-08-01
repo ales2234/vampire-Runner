@@ -312,6 +312,7 @@ UnityEngine.Application::get_unityVersionMaj
 UnityEngine.Application::get_unityVersionVer
 UnityEngine.Application::OpenURL_Injected
 UnityEngine.Application::Quit
+UnityEngine.Application::get_persistentDataPath_Injected
 UnityEngine.Application::get_streamingAssetsPath_Injected
 UnityEngine.Application::get_platform
 UnityEngine.AssetBundle::LoadAsset_Internal_Injected
@@ -402,6 +403,7 @@ UnityEngine.Canvas::get_renderingDisplaySize_Injected
 UnityEngine.Canvas::set_additionalShaderChannels_Injected
 UnityEngine.Canvas::set_overrideSorting_Injected
 UnityEngine.Canvas::set_referencePixelsPerUnit_Injected
+UnityEngine.Canvas::set_renderMode_Injected
 UnityEngine.Canvas::set_scaleFactor_Injected
 UnityEngine.Canvas::set_sortingLayerID_Injected
 UnityEngine.Canvas::set_sortingOrder_Injected
@@ -412,6 +414,7 @@ UnityEngine.CanvasGroup::get_ignoreParentGroups_Injected
 UnityEngine.CanvasGroup::get_interactable_Injected
 UnityEngine.CanvasGroup::get_alpha_Injected
 UnityEngine.CanvasGroup::set_alpha_Injected
+UnityEngine.CanvasGroup::set_blocksRaycasts_Injected
 UnityEngine.CanvasGroup::set_ignoreParentGroups_Injected
 UnityEngine.CanvasRenderer::get_cullTransparentMesh_Injected
 UnityEngine.CanvasRenderer::get_cull_Injected
@@ -1734,6 +1737,7 @@ UnityEngine.Time::get_fixedUnscaledTime
 UnityEngine.Time::get_realtimeSinceStartup
 UnityEngine.Time::get_smoothDeltaTime
 UnityEngine.Time::get_time
+UnityEngine.Time::get_timeScale
 UnityEngine.Time::get_unscaledDeltaTime
 UnityEngine.Time::get_unscaledTime
 UnityEngine.Time::get_timeAsRational_Injected

@@ -111,11 +111,15 @@ public class UIManager : MonoBehaviour
     private void PauseGame()
     {
         Time.timeScale = 0f;
+        if (GameManager.Instance != null)
+            GameManager.Instance.PauseMusic();
     }
 
     private void ResumeGame()
     {
         Time.timeScale = 1f;
+        if (GameManager.Instance != null)
+            GameManager.Instance.ResumeMusic();
     }
 
     private void OnGUI()

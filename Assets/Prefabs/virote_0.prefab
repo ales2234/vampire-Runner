@@ -181,3 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 20
   rb: {fileID: 6428128510187530043}
+  pointsPerHit: 100
+  pointsPerEnemyHit: 500
+  floatingPointsPrefab: {fileID: 1438667757172613237, guid: 125344d0cbc261141858452e922a6424, type: 3}
+  obstaclePointsColor: {r: 1, g: 1, b: 1, a: 1}
+  enemyPointsColor: {r: 1, g: 0.85, b: 0.2, a: 1}

@@ -3,7 +3,15 @@ using System.Collections.Generic;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] obstaclesPrefabs;
+    [System.Serializable]
+    public class SpawnEntry
+    {
+        public GameObject prefab;
+        [Tooltip("Relative chance. Example: 70 and 30 = 70% / 30%. Values do not need to add to 100.")]
+        [Range(0f, 100f)] public float chance = 25f;
+    }
+
+    [SerializeField] private SpawnEntry[] spawnEntries;
     [SerializeField] private Transform obstacleParent;
 
     public float spawnRate = 3f;
@@ -91,10 +99,10 @@ public class Spawner : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        if (obstaclesPrefabs == null || obstaclesPrefabs.Length == 0)
+        GameObject obstacleToSpawn = GetRandomPrefab();
+        if (obstacleToSpawn == null)
             return;
 
-        GameObject obstacleToSpawn = obstaclesPrefabs[Random.Range(0, obstaclesPrefabs.Length)];
         GameObject newObstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
 
         newObstacle.transform.parent = obstacleParent;
@@ -103,5 +111,43 @@ public class Spawner : MonoBehaviour
         Rigidbody2D obstacleRigidbody = newObstacle.GetComponent<Rigidbody2D>();
         if (obstacleRigidbody != null)
             obstacleRigidbody.linearVelocity = Vector2.left * _spawnForce;
+    }
+
+    private GameObject GetRandomPrefab()
+    {
+        if (spawnEntries == null || spawnEntries.Length == 0)
+            return null;
+
+        float totalChance = 0f;
+        for (int i = 0; i < spawnEntries.Length; i++)
+        {
+            if (spawnEntries[i].prefab != null && spawnEntries[i].chance > 0f)
+                totalChance += spawnEntries[i].chance;
+        }
+
+        if (totalChance <= 0f)
+            return null;
+
+        float roll = Random.Range(0f, totalChance);
+        float cumulative = 0f;
+
+        for (int i = 0; i < spawnEntries.Length; i++)
+        {
+            if (spawnEntries[i].prefab == null || spawnEntries[i].chance <= 0f)
+                continue;
+
+            cumulative += spawnEntries[i].chance;
+            if (roll <= cumulative)
+                return spawnEntries[i].prefab;
+        }
+
+        // Fallback: last valid prefab
+        for (int i = spawnEntries.Length - 1; i >= 0; i--)
+        {
+            if (spawnEntries[i].prefab != null)
+                return spawnEntries[i].prefab;
+        }
+
+        return null;
     }
 }

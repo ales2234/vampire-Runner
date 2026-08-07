@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Spawner spawner;
     [SerializeField] private float scoreMultiplier = 1f;
+    [SerializeField] private AudioSource musicSource;
 
     public float currentScore = 0f;
     public float highScore = 0f;
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
     {
         if (spawner == null)
             spawner = FindFirstObjectByType<Spawner>();
+
+        if (musicSource == null)
+            musicSource = GetComponent<AudioSource>();
 
         string dataToLoad = SaveSystem.load("data");
         if (dataToLoad != null)
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         onPlay.Invoke();
         isGameOver = true;
+        PlayMusic();
     }
 
     public void GameOver()
@@ -66,10 +71,35 @@ public class GameManager : MonoBehaviour
         string dataToSave = JsonUtility.ToJson(data);
         SaveSystem.save("data", dataToSave);
 
+        StopMusic();
         onGameOver.Invoke();
 
         isGameOver = false;
         currentScore = 0f;
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource != null)
+            musicSource.Stop();
+    }
+
+    public void PauseMusic()
+    {
+        if (musicSource != null)
+            musicSource.Pause();
+    }
+
+    public void ResumeMusic()
+    {
+        if (musicSource != null)
+            musicSource.UnPause();
+    }
+
+    public void PlayMusic()
+    {
+        if (musicSource != null && !musicSource.isPlaying)
+            musicSource.Play();
     }
 
     public string PrettyScore()

@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
     [SerializeField] private float groundDistance = 0.25f;
-    [SerializeField] private bool showDebugLogs = true;
+    [SerializeField] private bool showDebugLogs = false;
     [SerializeField] private Animator animator;
     [SerializeField] private Spawner spawner;
     [SerializeField] private float baseAnimSpeed = 1f;

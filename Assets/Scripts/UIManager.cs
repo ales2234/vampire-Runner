@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameOverScoreUI;
     [SerializeField] private TextMeshProUGUI gameOverHighScoreUI;
 
+    private string lastScoreText;
+
     private void Start()
     {
         GameManager.Instance.onGameOver.AddListener(ActivateGameOverUI);
@@ -21,6 +23,19 @@ public class UIManager : MonoBehaviour
             SetPauseButtonVisible(false);
             PauseGame();
         }
+    }
+
+    private void Update()
+    {
+        if (scoreUI == null || GameManager.Instance == null)
+            return;
+
+        string scoreText = GameManager.Instance.PrettyScore();
+        if (scoreText == lastScoreText)
+            return;
+
+        lastScoreText = scoreText;
+        scoreUI.text = scoreText;
     }
 
     public void PlayButtomHandler()
@@ -93,13 +108,9 @@ public class UIManager : MonoBehaviour
 
         if (gameOverScoreUI != null)
             gameOverScoreUI.text = "Score: " + GameManager.Instance.PrettyScore();
-        else
-            Debug.LogWarning("UIManager: Game Over Score UI is not assigned.");
 
         if (gameOverHighScoreUI != null)
             gameOverHighScoreUI.text = "High Score: " + GameManager.Instance.PrettyHighScore();
-        else
-            Debug.LogWarning("UIManager: Game Over High Score UI is not assigned.");
     }
 
     private void SetPauseButtonVisible(bool visible)
@@ -120,13 +131,5 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         if (GameManager.Instance != null)
             GameManager.Instance.ResumeMusic();
-    }
-
-    private void OnGUI()
-    {
-        if (scoreUI == null || GameManager.Instance == null)
-            return;
-
-        scoreUI.text = GameManager.Instance.PrettyScore();
     }
 }

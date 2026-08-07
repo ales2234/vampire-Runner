@@ -18,6 +18,11 @@ public class Spawner : MonoBehaviour
     [Range(0f, 1f)] public float spawnRateFactor = 0.5f;
     public float spawnForce = 1f;
     [Range(0f, 1f)] public float spawnForceFactor = 0.5f;
+    [SerializeField] private float minSpawnInterval = 0.45f;
+    [SerializeField] private float maxSpawnForce = 18f;
+    [SerializeField] private int maxAliveObstacles = 25;
+    [SerializeField] private float despawnX = -20f;
+
     private float timerUntilSpawn;
 
     public float _spawnRate;
@@ -42,6 +47,7 @@ public class Spawner : MonoBehaviour
 
         timeAlive += Time.deltaTime;
         CalculateFactors();
+        CleanupOffscreenObstacles();
         SpawnLoop();
     }
 
@@ -76,17 +82,23 @@ public class Spawner : MonoBehaviour
     {
         timerUntilSpawn += Time.deltaTime;
 
-        if (timerUntilSpawn >= _spawnRate)
-        {
-            SpawnObstacle();
-            timerUntilSpawn = 0f;
-        }
+        if (timerUntilSpawn < _spawnRate)
+            return;
+
+        if (CountAliveObstacles() >= maxAliveObstacles)
+            return;
+
+        SpawnObstacle();
+        timerUntilSpawn = 0f;
     }
 
     private void CalculateFactors()
     {
         _spawnRate = spawnRate / Mathf.Pow(timeAlive, spawnRateFactor);
+        _spawnRate = Mathf.Max(_spawnRate, minSpawnInterval);
+
         _spawnForce = spawnForce * Mathf.Pow(timeAlive, spawnForceFactor);
+        _spawnForce = Mathf.Min(_spawnForce, maxSpawnForce);
     }
 
     private void ResetFactors()
@@ -95,6 +107,37 @@ public class Spawner : MonoBehaviour
         _spawnRate = spawnRate;
         _spawnForce = spawnForce;
         timerUntilSpawn = 0f;
+    }
+
+    private void CleanupOffscreenObstacles()
+    {
+        for (int i = spawnedObstacles.Count - 1; i >= 0; i--)
+        {
+            GameObject obstacle = spawnedObstacles[i];
+            if (obstacle == null)
+            {
+                spawnedObstacles.RemoveAt(i);
+                continue;
+            }
+
+            if (obstacle.transform.position.x < despawnX)
+            {
+                Destroy(obstacle);
+                spawnedObstacles.RemoveAt(i);
+            }
+        }
+    }
+
+    private int CountAliveObstacles()
+    {
+        int count = 0;
+        for (int i = 0; i < spawnedObstacles.Count; i++)
+        {
+            if (spawnedObstacles[i] != null)
+                count++;
+        }
+
+        return count;
     }
 
     private void SpawnObstacle()
@@ -141,7 +184,6 @@ public class Spawner : MonoBehaviour
                 return spawnEntries[i].prefab;
         }
 
-        // Fallback: last valid prefab
         for (int i = spawnEntries.Length - 1; i >= 0; i--)
         {
             if (spawnEntries[i].prefab != null)

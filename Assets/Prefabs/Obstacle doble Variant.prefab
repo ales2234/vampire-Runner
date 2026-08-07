@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Obstacle doble Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1326267942410747428, guid: 3f111b57e81c0134785ce4f19f5d1229, type: 3}
+      propertyPath: m_TagString
+      value: double obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1527692102250951018, guid: 3f111b57e81c0134785ce4f19f5d1229, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.46

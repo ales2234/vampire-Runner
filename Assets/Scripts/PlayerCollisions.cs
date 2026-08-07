@@ -33,5 +33,15 @@ public class PlayerCollisions : MonoBehaviour
             gameObject.SetActive(false);
             GameManager.Instance.GameOver();
         }
+        if (other.transform.CompareTag("enemy"))
+        {
+            gameObject.SetActive(false);
+            GameManager.Instance.GameOver();
+        }
+        if (other.transform.CompareTag("double obstacle"))
+        {
+            gameObject.SetActive(false);
+            GameManager.Instance.GameOver();
+        }
     }
 }

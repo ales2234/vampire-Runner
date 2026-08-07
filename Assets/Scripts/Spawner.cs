@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     public float _spawnRate;
     public float _spawnForce;
     public float TimeAlive => timeAlive;
-    
+
     private float timeAlive;
 
     private readonly List<GameObject> spawnedObstacles = new List<GameObject>();
@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.onPlay.AddListener(ResetSpawner);
-        GameManager.Instance.onGameOver.AddListener(ClearObstacle);
+        GameManager.Instance.onGameOver.AddListener(ClearSpawnedObstacles);
         GameManager.Instance.onGameOver.AddListener(ResetFactors);
     }
 
@@ -52,6 +52,16 @@ public class Spawner : MonoBehaviour
         }
 
         spawnedObstacles.Clear();
+
+        if (obstacleParent == null)
+            return;
+
+        for (int i = obstacleParent.childCount - 1; i >= 0; i--)
+        {
+            Transform child = obstacleParent.GetChild(i);
+            if (child != null)
+                Destroy(child.gameObject);
+        }
     }
 
     private void SpawnLoop()
@@ -64,16 +74,15 @@ public class Spawner : MonoBehaviour
             timerUntilSpawn = 0f;
         }
     }
-    private void ClearObstacle(){
-        foreach (Transform child in obstacleParent){
-            Destroy(child.gameObject);
-        }
-    }
-    private void CalculateFactors(){
+
+    private void CalculateFactors()
+    {
         _spawnRate = spawnRate / Mathf.Pow(timeAlive, spawnRateFactor);
         _spawnForce = spawnForce * Mathf.Pow(timeAlive, spawnForceFactor);
     }
-    private void ResetFactors(){
+
+    private void ResetFactors()
+    {
         timeAlive = 1f;
         _spawnRate = spawnRate;
         _spawnForce = spawnForce;
@@ -89,7 +98,6 @@ public class Spawner : MonoBehaviour
         GameObject newObstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
 
         newObstacle.transform.parent = obstacleParent;
-
         spawnedObstacles.Add(newObstacle);
 
         Rigidbody2D obstacleRigidbody = newObstacle.GetComponent<Rigidbody2D>();

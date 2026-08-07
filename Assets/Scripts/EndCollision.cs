@@ -32,5 +32,9 @@ public class EndCollision : MonoBehaviour
             Destroy(other.gameObject);
         if (other.transform.CompareTag("Bullet"))
             Destroy(other.gameObject);
+        if (other.transform.CompareTag("enemy"))
+            Destroy(other.gameObject);
+        if (other.transform.CompareTag("double obstacle"))
+            Destroy(other.gameObject);
     }
 }

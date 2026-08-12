@@ -57,9 +57,6 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
             jumpHoldTimer = 0f;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-
-            if (showDebugLogs)
-                Debug.Log("Jump started");
         }
 
         if (isJumping && IsJumpHeld() && jumpHoldTimer < maxJumpHoldTime)

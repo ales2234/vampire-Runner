@@ -43,14 +43,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 1476537449
+    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: charcater
-    uniqueID: 2846771361
-    locked: 0
-  - name: weapon
-    uniqueID: 3371573975
     locked: 0
   - name: Ground
     uniqueID: 4253982599
@@ -58,8 +55,11 @@ TagManager:
   - name: obstacle
     uniqueID: 2343607817
     locked: 0
-  - name: background
-    uniqueID: 1476537449
+  - name: charcater
+    uniqueID: 2846771361
+    locked: 0
+  - name: weapon
+    uniqueID: 3371573975
     locked: 0
   m_RenderingLayers:
   - Default

@@ -151,9 +151,13 @@ public class Spawner : MonoBehaviour
         newObstacle.transform.parent = obstacleParent;
         spawnedObstacles.Add(newObstacle);
 
-        Rigidbody2D obstacleRigidbody = newObstacle.GetComponent<Rigidbody2D>();
-        if (obstacleRigidbody != null)
-            obstacleRigidbody.linearVelocity = Vector2.left * _spawnForce;
+        float spawnSpeed = _spawnForce;
+
+        ConstantScrollSpeed scroll = newObstacle.GetComponent<ConstantScrollSpeed>();
+        if (scroll == null)
+            scroll = newObstacle.AddComponent<ConstantScrollSpeed>();
+
+        scroll.SetSpeed(spawnSpeed);
     }
 
     private GameObject GetRandomPrefab()
